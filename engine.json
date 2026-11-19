@@ -1,0 +1,38 @@
+{
+  "name": "ocr-server",
+  "description": "Text in pictures, with where each line, word and character is (PaddleOCR models on ONNX Runtime, CPU).",
+  "task": "ocr",
+  "api": {
+    "base": "/v1/ocr",
+    "health": "/health",
+    "doc": "hemera docs/ocr-api.md"
+  },
+  "run": {
+    "python": "3.13",
+    "requirements": "requirements.txt",
+    "command": ["{venv}/bin/python", "-I", "{engine}/ocr_server.py", "--port", "{port}", "--models", "{models}", "--name", "{name}", "--threads", "8", "--workers", "2"],
+    "gpu": false
+  },
+  "fetch": {
+    "script": "setup/fetch.sh",
+    "files": "setup/models.tsv",
+    "optional": "setup/models-small.tsv",
+    "bytes": 221301292
+  },
+  "models": [
+    {
+      "name": "pp-ocrv6",
+      "detect": {
+        "file": "PP-OCRv6_medium_det_onnx/inference.yml",
+        "also": ["PP-OCRv6_medium_rec_onnx/inference.onnx", "PP-LCNet_x1_0_doc_ori_onnx/inference.onnx"]
+      },
+      "scripts": ["Latn", "Hani", "Jpan", "Hang", "Arab", "Thai", "Deva", "Cyrl", "Grek", "Taml", "Telu"],
+      "charBoxes": "exact",
+      "memoryMB": 3072,
+      "gpu": false,
+      "licences": [
+        {"what": "PaddleOCR models (PP-OCRv6, PP-OCRv5, PP-LCNet)", "name": "Apache-2.0", "url": "https://huggingface.co/PaddlePaddle"}
+      ]
+    }
+  ]
+}
