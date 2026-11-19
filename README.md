@@ -1,4 +1,4 @@
-# ocr-server
+# hemera-ocr-server
 
 Text in pictures, with where each line, word and character is, over HTTP. It is made for Live
 Text: a person points at a picture and selects, copies or looks up what it says. It reads with
@@ -44,6 +44,13 @@ The API's reference, with every field, is hemera's
 ## Setting it up
 
 Everything goes in one directory, here `/media/shared/AIModels/ocr`, which is called `DIR` below.
+
+### 0. The server
+
+```bash
+git clone https://github.com/peprasetya/hemera-ocr-server DIR/server
+cd DIR/server
+```
 
 ### 1. The models (221 MB)
 
